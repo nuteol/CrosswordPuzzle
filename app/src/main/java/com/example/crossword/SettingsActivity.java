@@ -12,14 +12,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings, new SettingsFragment())
-                .commit();
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {

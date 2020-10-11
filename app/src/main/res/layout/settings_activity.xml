@@ -1,9 +1,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
 
     <FrameLayout
         android:id="@+id/settings"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+        <SeekBar
+            android:id="@+id/seekBar"
+            android:layout_width="match_parent"
+            android:layout_height="72dp" />
+
+        <SeekBar
+            android:id="@+id/seekBar2"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
