@@ -26,20 +26,24 @@ public class LevelSelection extends AppCompatActivity {
     Crossword[] puzzles;
     private ListView listView;
     private ListAdapter adapter;
+    Button sort;
+    ArrayList<Word> words;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_selection);
-        listView = (ListView) findViewById(R.id.selectListView);
 
 
         //Puzzle creation, later I'll try to make it automatic, from a list of words that will be saved outside the game.
         //Another possibility is that I will save already premade puzzles in some sort of database, with complete word lists.
         puzzles = new Crossword[10];
         ArrayList<Crossword> croswords = new ArrayList<>();
-        ArrayList<Word> words = new ArrayList<>();
+        words = new ArrayList<>();
         words.add(new Word("cat","Feline animal",0,0,3,true));
+        words.add(new Word("pat","Repeated action of touching someone with affection",0,0,3,true));
+        words.add(new Word("sat","Past tense of sit",0,0,3,true));
+        words.add(new Word("art","Da Vinki",0,0,3,true));
         words.add(new Word("car","Automotive vehicle, with some sort of internal propulsion",0,0,3,false));
         words.add(new Word("tip","An end to some sort of thing.",2,0,3,false));
         words.add(new Word("rip","Tear something of",0,2,3,true));
@@ -52,6 +56,7 @@ public class LevelSelection extends AppCompatActivity {
         croswords.add(puzzles[0]);
 
         _button = (Button) findViewById(R.id.button6);
+        sort = (Button) findViewById(R.id.sortingbutton);
         lvl1 = (Button) findViewById(R.id.lvl1);
         lvl2 = (Button) findViewById(R.id.lvl2);
         lvl3 = (Button) findViewById(R.id.lvl3);
@@ -70,7 +75,7 @@ public class LevelSelection extends AppCompatActivity {
             }
         }
 
-        adapter = new ListAdapter(this, croswords);
+        //adapter = new ListAdapter(this, croswords);
 
 
         _button.setOnClickListener(new View.OnClickListener() {
@@ -114,6 +119,14 @@ public class LevelSelection extends AppCompatActivity {
                 }
             });
         }
-        listView.setAdapter(adapter);
+
+        sort.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), SortingActivity.class);
+                intent.putParcelableArrayListExtra("words",words);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -16,9 +16,9 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public class ListAdapter extends ArrayAdapter<Crossword> {
-    public ListAdapter(Context context, List<Crossword> objects) {
-        super(context, R.layout.listitemdesign);
+public class ListAdapter extends ArrayAdapter<Word> {
+    public ListAdapter(Context context, List<Word> objects) {
+        super(context, R.layout.listitemdesign, objects);
     }
 
     @NonNull
@@ -34,15 +34,13 @@ public class ListAdapter extends ArrayAdapter<Crossword> {
 
         TextView title = (TextView) view.findViewById(R.id.levelTitle);
         TextView description = (TextView) view.findViewById(R.id.levelDescription);
-        ImageView image = (ImageView) view.findViewById(R.id.playImage);
 
-        Crossword puzzle = getItem(position);
+        Word word = getItem(position);
 
-        title.setText(puzzle.getName());
-        int size = puzzle.getSize();
-        description.setText("Puzzle size:" + size + "x" + size);
-        Bitmap bitmap = BitmapFactory.decodeResource(view.getResources(),R.drawable.baseline_play_arrow_black_48dp);
-        image.setImageBitmap(bitmap);
+        title.setText(word.getWord());
+        description.setText(word.getDescription());
+        //Bitmap bitmap = BitmapFactory.decodeResource(view.getResources(),R.drawable.baseline_play_arrow_black_48dp);
+        //image.setImageBitmap(bitmap);
         return view;
     }
 }
