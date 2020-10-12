@@ -3,29 +3,47 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
-    <FrameLayout
-        android:id="@+id/settings"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-
-        <SeekBar
-            android:id="@+id/seekBar"
-            android:layout_width="match_parent"
-            android:layout_height="72dp" />
-
-        <SeekBar
-            android:id="@+id/seekBar2"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:max="10"
-            android:progress="3" />
-    </FrameLayout>
-
-    <androidx.appcompat.widget.AppCompatSeekBar
-        android:id="@+id/seekbar"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:textSize="30dp"
+        android:text="Settings menu"
+        android:textColor="@color/black" ></TextView>
+
+    <Switch
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/settingsSwith1"
+        android:text="Option A"
+        android:textSize="20dp"></Switch>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:id="@+id/settingsLayout1">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:textSize="16dp"
+            android:text="Slider 1"
+            android:textAlignment="center"
+            android:textColor="@color/black"></TextView>
+        <SeekBar
+            android:layout_width="match_parent"
+            android:layout_height="30dp"></SeekBar>
+    </LinearLayout>
+
+    <Button
+        android:layout_width="65dp"
+        android:layout_height="35dp"
+        android:id="@+id/backButton"
+        android:text="Back"
+        android:layout_marginTop="450dp"
+        android:layout_marginLeft="300dp"></Button>
+
+
+
+
 </LinearLayout>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GameScreen" >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/titleText"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:text="Crossword Puzzle"
+        android:textSize="30dp">
+    </TextView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:id="@+id/tempTextView"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="50dp"
+        android:textAlignment="center"
+        android:textSize="20dp">
+    </TextView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:id="@+id/layoutParent" >
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:id="@+id/completeButton"
+            android:text="Complete"
+            android:layout_marginRight="25dp" >
+
+        </Button>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="35dp"
+            android:id="@+id/failButton"
+            android:text="Fail">
+        </Button>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

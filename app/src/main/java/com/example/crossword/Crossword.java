@@ -3,17 +3,18 @@ package com.example.crossword;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Crossword implements Parcelable {
     private char[][] data;
     private String name;
     private int size;
-    List<Word> words;
+    ArrayList<Word> words;
 
     public Crossword() {}
 
-    public Crossword(char[][] data, String name, int size, List<Word> words) {
+    public Crossword(char[][] data, String name, int size, ArrayList<Word> words) {
         this.data = data;
         this.name = name;
         this.size = size;
@@ -21,10 +22,10 @@ public class Crossword implements Parcelable {
     }
 
     protected Crossword(Parcel in) {
-        this.data = (char[][]) in.readValue(char[][].class.getClassLoader());
+        this.data = (char[][]) in.readArray(char[][].class.getClassLoader());
         this.name = in.readString();
         this.size = in.readInt();
-        this.words = (List<Word>) in.readArrayList(List.class.getClassLoader());
+        this.words = (ArrayList<Word>) in.readArrayList(ArrayList.class.getClassLoader());
     }
 
     public static final Creator<Crossword> CREATOR = new Creator<Crossword>() {
@@ -67,11 +68,11 @@ public class Crossword implements Parcelable {
         this.size = data.length;
     }
 
-    public List<Word> getWords() {
+    public ArrayList<Word> getWords() {
         return words;
     }
 
-    public void setWords(List<Word> words) {
+    public void setWords(ArrayList<Word> words) {
         this.words = words;
     }
 
@@ -82,7 +83,7 @@ public class Crossword implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeValue(data);
+        parcel.writeArray(data);
         parcel.writeString(name);
         parcel.writeInt(size);
         parcel.writeValue(words);
