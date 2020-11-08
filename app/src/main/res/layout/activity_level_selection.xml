@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LevelSelection">
+    tools:context=".LevelSelection"
+    android:background="@drawable/background">
 
 
     <Button
@@ -17,7 +18,8 @@
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.976"
+        android:background="@drawable/button"/>
 
     <TextView
         android:id="@+id/textView3"
@@ -42,7 +44,8 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.266" />
+        app:layout_constraintVertical_bias="0.266"
+        android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/lvl2"
@@ -54,7 +57,8 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.37"
+        android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/lvl3"
@@ -66,7 +70,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468" />
+        app:layout_constraintVertical_bias="0.468"
+        android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/sortingbutton"
@@ -78,5 +83,6 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" ></Button>
+        app:layout_constraintVertical_bias="0.976"
+        android:background="@drawable/button"></Button>
 </androidx.constraintlayout.widget.ConstraintLayout>

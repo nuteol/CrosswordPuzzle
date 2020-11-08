@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HelpActivity">
+    tools:context=".HelpActivity"
+    android:background="@drawable/background">
 
     <Button
         android:id="@+id/button5"
@@ -16,7 +17,8 @@
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.976"
+        android:background="@drawable/button"/>
 
     <TextView
         android:id="@+id/textView2"

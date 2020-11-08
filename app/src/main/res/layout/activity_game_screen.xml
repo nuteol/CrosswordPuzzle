@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GameScreen" >
+    tools:context=".GameScreen"
+    android:background="@drawable/background">
 
 
     <TextView
@@ -39,7 +40,8 @@
             android:layout_height="35dp"
             android:id="@+id/completeButton"
             android:text="Complete"
-            android:layout_marginRight="25dp" >
+            android:layout_marginRight="25dp"
+            android:background="@drawable/button">
 
         </Button>
 
@@ -47,7 +49,8 @@
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:id="@+id/failButton"
-            android:text="Fail">
+            android:text="Fail"
+            android:background="@drawable/button">
         </Button>
 
     </LinearLayout>
