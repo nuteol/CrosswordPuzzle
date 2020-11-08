@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.689"
-        android:background="@drawable/button"/>
+        android:background="@drawable/gradient_button"/>
 
     <Button
         android:id="@+id/button3"

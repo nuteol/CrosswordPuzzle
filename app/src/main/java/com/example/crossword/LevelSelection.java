@@ -22,11 +22,12 @@ public class LevelSelection extends AppCompatActivity {
     Button lvl1;
     Button lvl2;
     Button lvl3;
+    Button sort;
+    Button query;
     int maxLevelUnlocked = 1;
     Crossword[] puzzles;
     private ListView listView;
     private ListAdapter adapter;
-    Button sort;
     ArrayList<Word> words;
 
     @Override
@@ -57,6 +58,7 @@ public class LevelSelection extends AppCompatActivity {
 
         _button = (Button) findViewById(R.id.button6);
         sort = (Button) findViewById(R.id.sortingbutton);
+        query = (Button) findViewById(R.id.query_activity);
         lvl1 = (Button) findViewById(R.id.lvl1);
         lvl2 = (Button) findViewById(R.id.lvl2);
         lvl3 = (Button) findViewById(R.id.lvl3);
@@ -64,14 +66,18 @@ public class LevelSelection extends AppCompatActivity {
         lvl3.setVisibility(View.GONE);
         lvl2.setHighlightColor(getResources().getColor(R.color.grey));
         Button[] buttons = { lvl1, lvl2, lvl3};
-
+        buttons[1].setActivated(false);
+        buttons[2].setActivated(false);
         Intent intent1 = getIntent();
         if (intent1.getBooleanExtra("complete",false)) {
-            maxLevelUnlocked = intent1.getIntExtra("lvl",0);
-            for(int i = 1; i < maxLevelUnlocked; i++) {
+            maxLevelUnlocked = intent1.getIntExtra("lvl",1);
+            //maxLevelUnlocked = 1;
+            for(int i = 0; i < maxLevelUnlocked; i++) {
+                if(maxLevelUnlocked > buttons.length)
+                    break;
                 buttons[i].setVisibility(View.VISIBLE);
                 buttons[i].setActivated(true);
-                listView.setVisibility(View.VISIBLE);
+                //listView.setVisibility(View.VISIBLE);
             }
         }
 
@@ -125,6 +131,14 @@ public class LevelSelection extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), SortingActivity.class);
                 intent.putParcelableArrayListExtra("words",words);
+                startActivity(intent);
+            }
+        });
+
+        query.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), QueryActivity.class);
                 startActivity(intent);
             }
         });

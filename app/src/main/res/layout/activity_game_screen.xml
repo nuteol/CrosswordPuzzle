@@ -41,7 +41,7 @@
             android:id="@+id/completeButton"
             android:text="Complete"
             android:layout_marginRight="25dp"
-            android:background="@drawable/button">
+            android:background="@drawable/gradient_button">
 
         </Button>
 

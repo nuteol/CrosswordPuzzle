@@ -45,7 +45,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.266"
-        android:background="@drawable/button"/>
+        android:background="@drawable/gradient_button"/>
 
     <Button
         android:id="@+id/lvl2"
@@ -58,7 +58,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.37"
-        android:background="@drawable/button"/>
+        android:background="@drawable/gradient_button"/>
 
     <Button
         android:id="@+id/lvl3"
@@ -71,7 +71,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.468"
-        android:background="@drawable/button"/>
+        android:background="@drawable/gradient_button"/>
 
     <Button
         android:id="@+id/sortingbutton"
@@ -85,4 +85,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         android:background="@drawable/button"></Button>
+
+    <Button
+        android:id="@+id/query_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Query"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976"
+        android:background="@drawable/button"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

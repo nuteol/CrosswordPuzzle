@@ -61,8 +61,9 @@ public class GameScreen extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), LevelSelection.class);
                 intent.putExtra("complete",true);
-                intent.putExtra("lvl",level+1);
-                Toast toast = Toast.makeText(getApplicationContext(),"Level complete!", Toast.LENGTH_SHORT);
+                int complete = level + 1;
+                intent.putExtra("lvl",complete);
+                Toast toast = Toast.makeText(getApplicationContext(),"Level complete!" + complete, Toast.LENGTH_SHORT);
                 toast.show();
                 startActivity(intent);
             }

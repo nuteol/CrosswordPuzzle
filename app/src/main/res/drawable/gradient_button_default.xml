@@ -10,5 +10,12 @@
         android:right="1dp"
         android:top="1dp"
         android:bottom="1dp" />
-    <solid android:color="#ffffff"/>
+    <gradient
+        android:startColor="#398afa"
+        android:endColor="@android:color/white"
+        android:angle="0"
+        android:centerX="0"
+        android:centerY="0.5"
+        android:type="radial"
+        android:gradientRadius="200dp"/>
 </shape>
