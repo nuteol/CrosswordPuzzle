@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.logging.LogRecord;
 
 public class QueryActivity extends AppCompatActivity implements RequestOperator.RequestOperatorListener {
@@ -18,7 +19,7 @@ public class QueryActivity extends AppCompatActivity implements RequestOperator.
     TextView bodyText;
     TextView jsonText;
     private IndicatingView indicator;
-    private ModelPost publication;
+    private List<Crossword> publication;
     LoadingDialog loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class QueryActivity extends AppCompatActivity implements RequestOperator.
         jsonText = (TextView) findViewById(R.id.json_elements);
         loading = new LoadingDialog(this);
         indicator = (IndicatingView)findViewById(R.id.generated_graphic);
+
     }
 
     public void setIndicatorStatus(final int status)
@@ -59,8 +61,8 @@ public class QueryActivity extends AppCompatActivity implements RequestOperator.
 
 
         loading.startLoadingAnimation();
+        loading.updateProgressBar(50);
         ro.start();
-
     }
 
     public void updatePublication(){
@@ -68,10 +70,10 @@ public class QueryActivity extends AppCompatActivity implements RequestOperator.
             @Override
             public void run() {
                 if(publication!=null){
-                    title.setText(publication.getTitle());
-                    bodyText.setText(publication.getBodyText());
+                    title.setText("");
+                    bodyText.setText("");
                     jsonText.setText("Number of items in JSON: ");
-                    jsonText.append(String.valueOf(publication.getJSONObject().length()));
+                    jsonText.append("");
                 } else {
                     title.setText("");
                     bodyText.setText("");
@@ -81,13 +83,15 @@ public class QueryActivity extends AppCompatActivity implements RequestOperator.
     }
 
     @Override
-    public void success(ModelPost publication) {
+    public void success(List<Crossword> publication) {
         this.publication = publication;
         updatePublication();
-
+        loading.updateProgressBar(100);
         loading.dismissLoading();
         setIndicatorStatus(IndicatingView.SUCCESS);
     }
+
+
 
     @Override
     public void failed(int responseCode) {

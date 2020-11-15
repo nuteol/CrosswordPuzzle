@@ -12,6 +12,11 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -23,6 +28,25 @@ android {
 }
 
 dependencies {
+    //room implementacija kryziazodziu saugojimui lokalioje duomenu bazeje
+    def room_version = "2.2.5"
+    def lifecycle_version = "2.2.0"
+    def arch_version = "2.1.0"
+
+    //room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
+
+    implementation "androidx.room:room-rxjava2:$room_version"
+    implementation "androidx.room:room-guava:$room_version"
+    implementation "androidx.room:room-testing:$room_version"
+
+    //lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel:$lifecycle_version"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$arch_version"
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'

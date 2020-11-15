@@ -14,6 +14,8 @@ public class MainActivity extends AppCompatActivity {
     Button _settingsButton;
     Button _exitButton;
     Button _helpButton;
+    Button _quickPlay;
+    QuickPlayDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
         _button = (Button) findViewById(R.id.button);
         _settingsButton = (Button) findViewById(R.id.button2);
         _helpButton = (Button) findViewById(R.id.button4);
-        _exitButton = (Button) findViewById(R.id.button3);
+        _quickPlay = (Button) findViewById(R.id.button3);
+        dialog = new QuickPlayDialog(this);
 
         _button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,12 +53,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        _exitButton.setOnClickListener(new View.OnClickListener() {
+        _quickPlay.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //exit on click
-                finish();
-                System.exit(0);
+            public void onClick(View v) {
+                dialog.startQuickplayDialog();
             }
         });
 

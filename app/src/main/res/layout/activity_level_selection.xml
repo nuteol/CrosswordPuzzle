@@ -1,101 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".LevelSelection"
+    android:orientation="vertical"
+    android:gravity="center"
     android:background="@drawable/background">
-
-
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.95"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        android:background="@drawable/button"/>
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="115dp"
+        android:layout_width="322dp"
         android:layout_height="45dp"
-        android:text="Levels"
+        android:text="Kryžiažodžiai"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+        android:fontFamily="monospace"
         android:textAlignment="center"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.135" />
+        android:textAllCaps="true"
+        android:textColor="@color/black"
+        android:textSize="40dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="vertical"
+        >
 
-    <Button
-        android:id="@+id/lvl1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Level 1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.266"
-        android:background="@drawable/gradient_button"/>
+        <ListView
+            android:id="@+id/puzzleList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarThumbVertical="@color/blue"
+            android:listSelector="@color/grey"
+            android:smoothScrollbar="true"></ListView>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/lvl2"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Level 2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37"
-        android:background="@drawable/gradient_button"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="20dp">
+        <Button
+            android:id="@+id/sortingbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Surikiuoti"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button"></Button>
 
-    <Button
-        android:id="@+id/lvl3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Level 3"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.468"
-        android:background="@drawable/gradient_button"/>
+        <Button
+            android:id="@+id/query_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atsisiųsti"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button"/>
 
-    <Button
-        android:id="@+id/sortingbutton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Sort List"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        android:background="@drawable/button"></Button>
+        <Button
+            android:id="@+id/animationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Animacija"
+            android:background="@drawable/button" />
 
-    <Button
-        android:id="@+id/query_activity"
-        android:layout_width="wrap_content"
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Query"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
-        android:background="@drawable/button"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:gravity="center">
+        <Button
+            android:id="@+id/delete_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:text="Trinti"
+            android:background="@drawable/button"/>
+
+        <Button
+            android:id="@+id/button6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Atgal"
+            android:background="@drawable/button"/>
+    </LinearLayout>
+
+</LinearLayout>

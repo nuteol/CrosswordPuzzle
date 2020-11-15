@@ -19,10 +19,17 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help);
         _button = (Button) findViewById(R.id.button5);
         textView = (TextView) findViewById(R.id.textView4);
-        textView.setText("help help help help\nhelp help help help\nhelp help help help" +
-                "\nhelp help help help\nhelp help help help\nhelp help help help\n" +
-                "help help help help\nhelp help help help\nhelp help help help\n" +
-                "help help help help\nhelp help help help\nhelp help help help\n");
+        textView.setText("Tai yra kryžiažodžio programėlė.\n" +
+                "Taigi, kas yra kryžiažodis?\n" +
+                "Kryžiažodis – žaidimas, kuriame spėjami žodžiai ir įrašomi į tam tikru būdu piešiamus langelius. Dažniausiai žodžiai susikerta.\n" +
+                "Žaidimo tikslas:\n" +
+                "Išspresti kryžiažodį naudojantis kuo mažiau pagalbos ir surenkant kuo daugiau taškų. Naudojantis pagalba taškai nerenkami." +
+                "Taip pat galimų pagalbų skaičius ribotas kiekvienam kryžiažodžiui." +
+                "Kaip žaisti žaidimą:\n" +
+                "Pasirinkite langelį, kuriame prasideda žodis. Žaidimo lange iššoks žodžio paaiškinimas, iš kurio jūs turite išsiaiškinti " +
+                "koks tai yra žodis.\n" +
+                "Nežinote žodžio?\n" +
+                "Paspauskite pagalbos mygtuką, jis jums parodys po raidę, tačiau tai kainuos taškus");
 
         _button.setOnClickListener(new View.OnClickListener() {
             @Override

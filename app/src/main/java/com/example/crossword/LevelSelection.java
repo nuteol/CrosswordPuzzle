@@ -1,90 +1,82 @@
 package com.example.crossword;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.RoomDatabase;
 
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Parcel;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-public class LevelSelection extends AppCompatActivity {
+public class LevelSelection extends AppCompatActivity implements RequestOperator.RequestOperatorListener {
 
-    Button _button;
-    Button lvl1;
-    Button lvl2;
-    Button lvl3;
+    Button back;
+    ListView puzzleList;
     Button sort;
     Button query;
+    Button animation;
+    Button delete;
     int maxLevelUnlocked = 1;
-    Crossword[] puzzles;
-    private ListView listView;
     private ListAdapter adapter;
-    ArrayList<Word> words;
+    List<Crossword> publication;
+    LoadingDialog loading;
+    private  AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_selection);
+        db = AppActivity.getDatabase();
 
 
-        //Puzzle creation, later I'll try to make it automatic, from a list of words that will be saved outside the game.
-        //Another possibility is that I will save already premade puzzles in some sort of database, with complete word lists.
-        puzzles = new Crossword[10];
-        ArrayList<Crossword> croswords = new ArrayList<>();
-        words = new ArrayList<>();
-        words.add(new Word("cat","Feline animal",0,0,3,true));
-        words.add(new Word("pat","Repeated action of touching someone with affection",0,0,3,true));
-        words.add(new Word("sat","Past tense of sit",0,0,3,true));
-        words.add(new Word("art","Da Vinki",0,0,3,true));
-        words.add(new Word("car","Automotive vehicle, with some sort of internal propulsion",0,0,3,false));
-        words.add(new Word("tip","An end to some sort of thing.",2,0,3,false));
-        words.add(new Word("rip","Tear something of",0,2,3,true));
-        char[][] data = {   {'c','a','t'},
-                            {'a','0','i'},
-                            {'r','i','p'}};
-        puzzles[0] = new Crossword(data,"Level 1", 3, words);
-        croswords.add(puzzles[0]);
-        croswords.add(puzzles[0]);
-        croswords.add(puzzles[0]);
-
-        _button = (Button) findViewById(R.id.button6);
+        back = (Button) findViewById(R.id.button6);
         sort = (Button) findViewById(R.id.sortingbutton);
         query = (Button) findViewById(R.id.query_activity);
-        lvl1 = (Button) findViewById(R.id.lvl1);
-        lvl2 = (Button) findViewById(R.id.lvl2);
-        lvl3 = (Button) findViewById(R.id.lvl3);
-        lvl2.setVisibility(View.GONE);
-        lvl3.setVisibility(View.GONE);
-        lvl2.setHighlightColor(getResources().getColor(R.color.grey));
-        Button[] buttons = { lvl1, lvl2, lvl3};
-        buttons[1].setActivated(false);
-        buttons[2].setActivated(false);
-        Intent intent1 = getIntent();
-        if (intent1.getBooleanExtra("complete",false)) {
-            maxLevelUnlocked = intent1.getIntExtra("lvl",1);
-            //maxLevelUnlocked = 1;
-            for(int i = 0; i < maxLevelUnlocked; i++) {
-                if(maxLevelUnlocked > buttons.length)
-                    break;
-                buttons[i].setVisibility(View.VISIBLE);
-                buttons[i].setActivated(true);
-                //listView.setVisibility(View.VISIBLE);
-            }
+        animation = (Button) findViewById(R.id.animationButton);
+        delete = (Button) findViewById(R.id.delete_button);
+        puzzleList = (ListView) findViewById(R.id.puzzleList);
+        loading = new LoadingDialog(this);
+
+        //reads data from file
+        Type pubType = new TypeToken<List<Crossword>>() {}.getType();
+        String data = readFromFile(this);
+        if(data != "") {
+            publication = new Gson().fromJson(data, pubType);
+            setAdapter(puzzleList, publication);
         }
 
-        //adapter = new ListAdapter(this, croswords);
 
-
-        _button.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -92,55 +84,157 @@ public class LevelSelection extends AppCompatActivity {
             }
         });
 
-        lvl1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), GameScreen.class);
-                intent.putExtra("puzzle", (new Gson()).toJson(puzzles[0]));
-                intent.putExtra("lvl",1);
-                startActivity(intent);
-            }
-        });
 
-        if(lvl2.isActivated() == true) {
-            lvl2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getBaseContext(), GameScreen.class);
-                    intent.putExtra("puzzle", (new Gson()).toJson(puzzles[0]));
-                    intent.putExtra("lvl",2);
-                    startActivity(intent);
-                }
-            });
-        }
-
-        if(lvl3.isActivated() == true) {
-            lvl3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(getBaseContext(), GameScreen.class);
-                    intent.putExtra("puzzle", (new Gson()).toJson(puzzles[0]));
-                    intent.putExtra("lvl",2);
-                    startActivity(intent);
-                }
-            });
-        }
 
         sort.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), SortingActivity.class);
-                intent.putParcelableArrayListExtra("words",words);
-                startActivity(intent);
+                Collections.sort(publication);
+                setAdapter(puzzleList,publication);
             }
         });
 
         query.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), QueryActivity.class);
+                sendRequest();
+            }
+        });
+
+        puzzleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Crossword selected = (Crossword) puzzleList.getItemAtPosition(i);
+                Intent intent = new Intent(getBaseContext(), GameScreen.class);
+                intent.putExtra("puzzle", (new Gson()).toJson(selected));
+                intent.putExtra("lvl",1);
                 startActivity(intent);
             }
         });
+
+
+
+        animation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getBaseContext(), CircleAnimation.class);
+                startActivity(intent);
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File file = new File("crosswordData.txt");
+                if(!file.exists())
+                    file.delete();
+            }
+        });
+    }
+
+    void setAdapter(ListView listView, List<Crossword> crosswords)
+    {
+        adapter = new ListAdapter(this,crosswords);
+        listView.setClickable(true);
+        listView.setAdapter(adapter);
+    }
+
+    private void sendRequest(){
+        RequestOperator ro = new RequestOperator();
+        ro.setListener(this);
+        //setIndicatorStatus(IndicatingView.LOADING);
+
+
+        loading.startLoadingAnimation();
+        ro.setLoadingDialog(loading);
+        ro.start();
+    }
+
+    public void updateProgress(int progress) {
+        loading.updateProgressBar(progress);
+    }
+
+    public void updatePublication(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if(publication!=null){
+                    setAdapter(puzzleList, publication);
+                    puzzleList.setClickable(true);
+                } else {
+                    setAdapter(puzzleList,null);
+                    puzzleList.setClickable(true);
+                }
+            }
+        });
+    }
+
+    @Override
+    public void success(List<Crossword> publication) {
+        this.publication = publication;
+        //addToDb(publication);
+        Type pubType = new TypeToken<List<Crossword>>() {}.getType();
+        writeToFile(new Gson().toJson(publication, pubType),this);
+        updatePublication();
+        loading.dismissLoading();
+        //setIndicatorStatus(IndicatingView.SUCCESS);
+    }
+
+    @Override
+    public void failed(int responseCode) {
+        this.publication = null;
+        updatePublication();
+        loading.dismissLoading();
+        //setIndicatorStatus(IndicatingView.FAILED);
+    }
+
+    private void addToDb(List<Crossword> crosswords) {
+        for(Crossword crossword : crosswords) {
+            db.crosswordDAO().insert(crossword);
+        }
+        Toast.makeText(getApplicationContext(),
+                "Kryžiažodžiai išsaugoti sėkmingai",
+                Toast.LENGTH_LONG).show();
+    }
+
+    private void writeToFile(String data, Context context) {
+        try {
+            OutputStreamWriter outputStreamWriter = new OutputStreamWriter(context.openFileOutput("crosswordData.txt", Context.MODE_PRIVATE));
+            outputStreamWriter.write(data);
+            outputStreamWriter.close();
+        }
+        catch (IOException e) {
+            Log.e("Exception", "File write failed: " + e.toString());
+        }
+    }
+
+    private String readFromFile(Context context) {
+
+        String ret = "";
+
+        try {
+            InputStream inputStream = context.openFileInput("crosswordData.txt");
+
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
+
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append("\n").append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
     }
 }

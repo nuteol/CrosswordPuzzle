@@ -37,7 +37,7 @@ public class SortingActivity extends AppCompatActivity {
         words = new ArrayList<>();
         for(Word w : sortedWords)
             words.add(w);
-        adapter = new ListAdapter(this, words);
+        //adapter = new ListAdapter(this, words);
         myListView.setAdapter(adapter);
     }
 }

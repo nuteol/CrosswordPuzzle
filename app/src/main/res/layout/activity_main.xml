@@ -9,7 +9,7 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="115dp"
         android:layout_height="wrap_content"
         android:text="@string/levels"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -18,24 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.689"
-        android:background="@drawable/gradient_button"/>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/exit"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.823"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.856"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:layout_width="115dp"
         android:layout_height="wrap_content"
         android:text="@string/settings"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -44,7 +32,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.774"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Žaisti"
+        android:background="@drawable/gradient_button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2" />
 
     <Button
         android:id="@+id/button4"
@@ -59,19 +59,16 @@
         app:layout_constraintVertical_bias="0.023"
         android:background="@drawable/button"/>
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="289dp"
-        android:layout_height="42dp"
-        android:text="@string/crossword_puzzle_game_thingy"
-        android:textSize="20dp"
-        android:textColor="@color/colorPrimary"
-        android:fontFamily="sans-serif-medium"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/titleImg"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:layout_marginTop="72dp"
+        android:src="@drawable/kryziazodis_full"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.211" />
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

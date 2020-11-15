@@ -8,17 +8,16 @@
         android:layout_width="110dp"
         android:layout_height="60dp"
         android:textAlignment="center"
-        android:textSize="25dp"
-        android:layout_marginTop="15dp"
+        android:textSize="20dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="13dp"
         android:layout_marginRight="17dp">
     </TextView>
     <TextView
         android:id="@+id/levelDescription"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textAlignment="center"
         android:textSize="15dp"
-        android:layout_marginTop="2dp">
+        android:textColor="#398afa">
     </TextView>
-"
 </LinearLayout>
