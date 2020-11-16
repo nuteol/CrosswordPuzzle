@@ -51,6 +51,7 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
     List<Crossword> publication;
     LoadingDialog loading;
     private  AppDatabase db;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +63,10 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
         back = (Button) findViewById(R.id.button6);
         sort = (Button) findViewById(R.id.sortingbutton);
         query = (Button) findViewById(R.id.query_activity);
-        animation = (Button) findViewById(R.id.animationButton);
         delete = (Button) findViewById(R.id.delete_button);
         puzzleList = (ListView) findViewById(R.id.puzzleList);
         loading = new LoadingDialog(this);
+        context = this;
 
         //reads data from file
         Type pubType = new TypeToken<List<Crossword>>() {}.getType();
@@ -112,22 +113,10 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
             }
         });
 
-
-
-        animation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), CircleAnimation.class);
-                startActivity(intent);
-            }
-        });
-
         delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                File file = new File("crosswordData.txt");
-                if(!file.exists())
-                    file.delete();
+                writeToFile("", context);
             }
         });
     }
@@ -176,16 +165,16 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
         Type pubType = new TypeToken<List<Crossword>>() {}.getType();
         writeToFile(new Gson().toJson(publication, pubType),this);
         updatePublication();
+        loading.setIndicatorStatus(IndicatingView.SUCCESS);
         loading.dismissLoading();
-        //setIndicatorStatus(IndicatingView.SUCCESS);
     }
 
     @Override
     public void failed(int responseCode) {
         this.publication = null;
         updatePublication();
+        loading.setIndicatorStatus(IndicatingView.FAILED);
         loading.dismissLoading();
-        //setIndicatorStatus(IndicatingView.FAILED);
     }
 
     private void addToDb(List<Crossword> crosswords) {

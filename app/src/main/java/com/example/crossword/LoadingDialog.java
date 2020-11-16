@@ -19,7 +19,7 @@ public class LoadingDialog {
     Activity activity;
     AlertDialog dialog;
     AnimationDrawable animation;
-    ImageView loading;
+    IndicatingView loading;
     private ProgressBar progression;
     private TextView progressText;
     private int progr = 0;
@@ -51,11 +51,11 @@ public class LoadingDialog {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View myView = inflater.inflate(R.layout.loading_dialog, null);
-        ImageView imageView = myView.findViewById(R.id.imageView);
+        loading = myView.findViewById(R.id.imageView);
 
         progression = (ProgressBar) myView.findViewById(R.id.progressBar);
         progressText = (TextView) myView.findViewById(R.id.text_view_progress);
-        animation = (AnimationDrawable) imageView.getBackground();
+        animation = (AnimationDrawable) loading.getBackground();
 
         progressBarAnimation = new ProgressBarAnimation(progression,progressText,1);
         updateProgressBar(1);
@@ -66,6 +66,11 @@ public class LoadingDialog {
         builder.setCancelable(false);
         dialog = builder.create();
         dialog.show();
+    }
+
+    public void setIndicatorStatus(final int status) {
+        loading.setState(status);
+        loading.invalidate();
     }
 
     void dismissLoading() {

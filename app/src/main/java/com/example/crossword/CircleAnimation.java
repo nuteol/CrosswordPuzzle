@@ -6,6 +6,7 @@ import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.View;
@@ -17,11 +18,9 @@ public class CircleAnimation extends AppCompatActivity {
     ImageView imageView;
     Button start;
     Button stop;
-    final float[] from = new float[3],
-                    to = new float[3];
-
     ValueAnimator colorAnim;
     ArgbEvaluator colorEvaluator;
+    boolean started;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,36 +29,39 @@ public class CircleAnimation extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.animationView);
         start = (Button) findViewById(R.id.start_animation);
         stop = (Button) findViewById(R.id.stop_animation);
-        final int red = getResources().getColor(R.color.red);
-        final float[] hsv  = new float[3];                  // transition color
-        colorAnim = ObjectAnimator.ofFloat(0f, 1f);
+
+        int colorFrom = getResources().getColor(R.color.blue);
+        int colorTo = getResources().getColor(R.color.red);
+        colorAnim = ValueAnimator.ofObject(new ArgbEvaluator(),colorFrom, colorTo);
+        colorAnim.setDuration(1500);
         colorAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                float mul = (Float) animation.getAnimatedValue();
-                int alphaRed = adjustAlpha(red, mul);
-                imageView.setColorFilter(alphaRed);
-                imageView.setBackground(getResources().getDrawable(R.color.blue));
-                if (mul == 0.0) {
-                    imageView.setColorFilter(alphaRed);
-                }
+                imageView.getBackground().setColorFilter((int)animation.getAnimatedValue(), PorterDuff.Mode.MULTIPLY);
+
             }
         });
-        colorAnim.setDuration(1500);
         colorAnim.setRepeatMode(ValueAnimator.REVERSE);
         colorAnim.setRepeatCount(-1);
-        colorAnim.start();
-
+        //colorAnim.start();
+        started = false;
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                colorAnim.start();
+                if(!started) {
+                    colorAnim.start();
+                    started = true;
+                }
+                else {
+                    colorAnim.resume();
+                }
+
             }
         });
         stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                colorAnim.cancel();
+                colorAnim.pause();
             }
         });
     }

@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:padding="50dp">
 
-    <ImageView
+    <com.example.crossword.IndicatingView
         android:id="@+id/imageView"
         android:layout_width="100dp"
         android:layout_height="100dp"

@@ -56,15 +56,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Atsisiųsti"
-            android:layout_marginRight="20dp"
             android:background="@drawable/button"/>
 
-        <Button
-            android:id="@+id/animationButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Animacija"
-            android:background="@drawable/button" />
 
     </LinearLayout>
     <LinearLayout
