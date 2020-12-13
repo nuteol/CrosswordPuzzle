@@ -44,7 +44,7 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
     ListView puzzleList;
     Button sort;
     Button query;
-    Button animation;
+    Button newView;
     Button delete;
     int maxLevelUnlocked = 1;
     private ListAdapter adapter;
@@ -71,6 +71,7 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
         //reads data from file
         Type pubType = new TypeToken<List<Crossword>>() {}.getType();
         String data = readFromFile(this);
+        //String words = readWordsFromFile(this);
         if(data != "") {
             publication = new Gson().fromJson(data, pubType);
             setAdapter(puzzleList, publication);
@@ -110,13 +111,6 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
                 intent.putExtra("puzzle", (new Gson()).toJson(selected));
                 intent.putExtra("lvl",1);
                 startActivity(intent);
-            }
-        });
-
-        delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                writeToFile("", context);
             }
         });
     }
@@ -166,6 +160,7 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
         writeToFile(new Gson().toJson(publication, pubType),this);
         updatePublication();
         loading.setIndicatorStatus(IndicatingView.SUCCESS);
+
         loading.dismissLoading();
     }
 
@@ -177,14 +172,7 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
         loading.dismissLoading();
     }
 
-    private void addToDb(List<Crossword> crosswords) {
-        for(Crossword crossword : crosswords) {
-            db.crosswordDAO().insert(crossword);
-        }
-        Toast.makeText(getApplicationContext(),
-                "Kryžiažodžiai išsaugoti sėkmingai",
-                Toast.LENGTH_LONG).show();
-    }
+
 
     private void writeToFile(String data, Context context) {
         try {
@@ -200,10 +188,39 @@ public class LevelSelection extends AppCompatActivity implements RequestOperator
     private String readFromFile(Context context) {
 
         String ret = "";
+        File file = new File("crosswordData.txt");
 
         try {
             InputStream inputStream = context.openFileInput("crosswordData.txt");
+            if ( inputStream != null ) {
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                String receiveString = "";
+                StringBuilder stringBuilder = new StringBuilder();
 
+                while ( (receiveString = bufferedReader.readLine()) != null ) {
+                    stringBuilder.append("\n").append(receiveString);
+                }
+
+                inputStream.close();
+                ret = stringBuilder.toString();
+            }
+        }
+        catch (FileNotFoundException e) {
+            Log.e("login activity", "File not found: " + e.toString());
+        } catch (IOException e) {
+            Log.e("login activity", "Can not read file: " + e.toString());
+        }
+
+        return ret;
+    }
+
+    private String readWordsFromFile(Context context) {
+
+        String ret = "";
+        context.getAssets();
+        try {
+            InputStream inputStream = context.openFileInput("src/androidTest/assets/lithuanian-words-list.txt");
             if ( inputStream != null ) {
                 InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
                 BufferedReader bufferedReader = new BufferedReader(inputStreamReader);

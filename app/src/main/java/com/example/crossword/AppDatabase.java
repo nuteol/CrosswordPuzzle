@@ -4,8 +4,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-@Database(entities = {Crossword.class}, version =  1)
-@TypeConverters(CharConverters.class)
+@Database(entities = {Word.class}, version =  1)
 public abstract class AppDatabase extends RoomDatabase {
-    public abstract CrosswordDAO crosswordDAO();
+    public abstract WordDAO wordDAO();
 }

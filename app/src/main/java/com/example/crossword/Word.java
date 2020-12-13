@@ -3,15 +3,37 @@ package com.example.crossword;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Word implements Parcelable {
+    @NonNull
+    @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "word")
     String word;
+    @NonNull
+    @ColumnInfo(name = "description")
     String description;
-    int startX, startY;
+    @NonNull
+    @ColumnInfo(name = "startx")
+    int startX;
+    @NonNull
+    @ColumnInfo(name = "starty")
+    int startY;
+    @NonNull
+    @ColumnInfo(name = "length")
     int length;
+    @NonNull
+    @ColumnInfo(name = "horizontal")
     boolean horizontal;
 
     public Word() {}
 
+    @Ignore
     public Word(String word, String description, int startX, int startY, int length, boolean horizontal) {
         this.word = word;
         this.description = description;
@@ -21,6 +43,7 @@ public class Word implements Parcelable {
         this.horizontal = horizontal;
     }
 
+    @Ignore
     public Word(Parcel parcel) {
         this.word = parcel.readString();
         this.description = parcel.readString();
@@ -30,6 +53,7 @@ public class Word implements Parcelable {
         this.horizontal = (Boolean) parcel.readValue(Boolean.class.getClassLoader());
     }
 
+    @Ignore
     public static final Creator<Word> CREATOR = new Creator<Word>() {
         @Override
         public Word createFromParcel(Parcel parcel) {

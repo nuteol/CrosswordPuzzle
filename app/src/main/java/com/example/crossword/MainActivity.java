@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
-
+    AppDatabase db;
     Button _button;
-    Button _settingsButton;
-    Button _exitButton;
     Button _helpButton;
     Button _quickPlay;
     QuickPlayDialog dialog;
@@ -23,24 +21,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         _button = (Button) findViewById(R.id.button);
-        _settingsButton = (Button) findViewById(R.id.button2);
         _helpButton = (Button) findViewById(R.id.button4);
         _quickPlay = (Button) findViewById(R.id.button3);
         dialog = new QuickPlayDialog(this);
+        db = AppActivity.getDatabase();
 
         _button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //on click
                 Intent intent = new Intent(getBaseContext(), LevelSelection.class);
-                startActivity(intent);
-            }
-        });
-
-        _settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getBaseContext(), SettingsActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         _quickPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.setContext(MainActivity.this);
                 dialog.startQuickplayDialog();
             }
         });

@@ -102,13 +102,13 @@ public class RequestOperator extends Thread {
 
         ArrayList<Word> words;
         words = new ArrayList<>();
-        words.add(new Word("cat","Feline animal",0,0,3,true));
-        words.add(new Word("pat","Repeated action of touching someone with affection",0,0,3,true));
-        words.add(new Word("sat","Past tense of sit",0,0,3,true));
-        words.add(new Word("art","Da Vinki",0,0,3,true));
-        words.add(new Word("car","Automotive vehicle, with some sort of internal propulsion",0,0,3,false));
-        words.add(new Word("tip","An end to some sort of thing.",2,0,3,false));
-        words.add(new Word("rip","Tear something of",0,2,3,true));
+        //words.add(new Word("cat","Feline animal",0,0,3));
+        //words.add(new Word("pat","Repeated action of touching someone with affection",3));
+        //words.add(new Word("sat","Past tense of sit",3));
+        //words.add(new Word("art","Da Vinki",3));
+        //words.add(new Word("car","Automotive vehicle, with some sort of internal propulsion",3));
+        //words.add(new Word("tip","An end to some sort of thing.",3));
+        //words.add(new Word("rip","Tear something of",3));
         char[][] data = {   {'c','a','t'},
                 {'a','0','i'},
                 {'r','i','p'}};

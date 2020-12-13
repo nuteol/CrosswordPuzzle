@@ -16,18 +16,45 @@
         android:id="@+id/titleText"
         android:layout_marginTop="10dp"
         android:textAlignment="center"
-        android:text="Crossword Puzzle"
+        android:textColor="@color/black"
+        android:textAllCaps="true"
+        android:fontFamily="casual"
+        android:text="Kryžiažodis"
         android:textSize="30dp">
     </TextView>
-    <TextView
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="5dp">
+        <TextView
+            android:text="Paaiškinimai:\n"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/cluesText"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="50dp"
+            android:textAlignment="center"
+            android:background="@drawable/crossword_background2"
+            android:textSize="20dp">
+        </TextView>
+    </ScrollView>
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:id="@+id/tempTextView"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="50dp"
-        android:textAlignment="center"
-        android:textSize="20dp">
-    </TextView>
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp">
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/crossword_background2"
+            android:id="@+id/letter_grid">
+
+        </GridView>
+    </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"

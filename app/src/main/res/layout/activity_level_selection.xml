@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Surikiuoti"
-            android:layout_marginRight="20dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/button"></Button>
 
         <Button
@@ -57,6 +57,7 @@
             android:layout_height="wrap_content"
             android:text="Atsisiųsti"
             android:background="@drawable/button"/>
+
 
 
     </LinearLayout>
